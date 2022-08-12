@@ -1,0 +1,77 @@
+import os
+
+print()
+print()
+print()
+
+print(" - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
+print("          Import TensorFlow Federated Dataset           ")
+print("                         db : emnist                    ")
+print("                  extension : emnist                    ")
+print(" - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
+print()
+os.system('python3.8 sql_tff_emnist.py emnist 10 0')
+
+print()
+print()
+print()
+
+print(" - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
+print("             Import SmartNoise PUMS Dataset             ")
+print("                         db : pums                      ")
+print("                  extension : pums                      ")
+print(" - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
+print()
+os.system('python3.8 sql_sn_pums.py')
+
+print()
+print()
+print()
+
+print(" - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
+print("        Import SmartNoise Random Sample Dataset         ")
+print("                         db : sn                        ")
+print("                  extension : sn                        ")
+print(" - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
+print()
+os.system('python3.8 sql_sn_sample.py')
+
+print()
+print()
+print()
+
+print(" - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
+print("              Import Kaggle Cancer Dataset              ")
+print("                         db : nki                       ")
+print("                  extension : nki                       ")
+print(" - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
+print()
+os.system('python3.8 sql_kaggle_nki.py')
+
+print()
+print()
+print()
+
+print(" - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
+print("             Import Kaggle Nerves Dataset               ")
+print("                         db : nerves                    ")
+print("                  extension : nerves                    ")
+print(" - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
+print()
+os.system('python3.8 sql_kaggle_nerves.py')
+
+print()
+print()
+print()
+
+print(" - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
+print("                  Import Iris Dataset                   ")
+print("                         db : iris                      ")
+print("                  extension : iris                      ")
+print(" - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
+print()
+os.system('python3.8 sql_sklearn_iris.py')
+
+print()
+print()
+print()
