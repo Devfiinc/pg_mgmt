@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+# PETs dataset
+datasets/PETs/bank_swift/

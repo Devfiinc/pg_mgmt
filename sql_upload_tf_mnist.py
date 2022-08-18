@@ -1,7 +1,7 @@
 # Import OS and disable warnings for enhanced demo
 import os
-from re import X
-from tkinter import Y
+#from re import X
+#from tkinter import Y
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
 
 import sys
