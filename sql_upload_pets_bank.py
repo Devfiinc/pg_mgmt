@@ -142,7 +142,7 @@ def main(argv):
 
     data_swift_train = pd.read_csv(csv_path_swift_train)
     print(data_swift_train.head())
-    upload("swift_train", data_swift_train)
+    upload("swift", data_swift_train)
 
     data_swift_test  = pd.read_csv(csv_path_swift_test)
     print(data_swift_test.head())
