@@ -17,11 +17,9 @@ data_dir = "datasets/PETs/bank_swift/"
 
 
 
-train = pd.read_csv(
-    data_dir + "/swift_transaction_train_dataset.csv", index_col="MessageId", nrows=100
-)
+train = pd.read_csv(data_dir + "/swift_transaction_train_dataset.csv", index_col="MessageId")
 train["Timestamp"] = train["Timestamp"].astype("datetime64[ns]")
-test = pd.read_csv(data_dir + "/swift_transaction_test_dataset.csv", index_col="MessageId", nrows=100)
+test = pd.read_csv(data_dir + "/swift_transaction_test_dataset.csv", index_col="MessageId")
 test["Timestamp"] = test["Timestamp"].astype("datetime64[ns]")
 
 
@@ -128,7 +126,7 @@ scaler.fit(X_train)
 X_train = scaler.transform(X_train)
 X_test = scaler.transform(X_test)
 
-print("aaaa")
+
 np.savetxt("datasets/PETs/bank_swift/swift_train_x.csv", X_train, delimiter=",", fmt='%.10f')
 np.savetxt("datasets/PETs/bank_swift/swift_train_y.csv", Y_train, delimiter=",", fmt='%.1f')
 
