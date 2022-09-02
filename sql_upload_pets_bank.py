@@ -67,7 +67,7 @@ def upload(table_name, data, col_limit=None):
 
     # Create table
     cur.execute(query)
-    cur.execute("CREATE INDEX idx_" + index + " ON " + table_name + "(" + index + ")")
+    #cur.execute("CREATE INDEX idx_" + index + " ON " + table_name + "(" + index + ")")
     cur.execute("SET search_path = schema1, public;")
 
 
@@ -132,21 +132,40 @@ def upload(table_name, data, col_limit=None):
 
 
 def main(argv):
-    csv_path_bank = 'datasets/PETs/bank_swift/bank_dataset/bank_dataset.csv'
-    csv_path_swift_train = 'datasets/PETs/bank_swift/swift_transaction_train_dataset/swift_transaction_train_dataset.csv'
-    csv_path_swift_test = 'datasets/PETs/bank_swift/bank_dataset/bank_dataset.csv'
+    csv_path_bank = 'datasets/PETs/bank_swift/bank_dataset.csv'
+    csv_path_swift_train = 'datasets/PETs/bank_swift/swift_transaction_train_dataset.csv'
+    csv_path_swift_test = 'datasets/PETs/bank_swift/swift_transaction_test_dataset.csv'
 
-    data_bank = pd.read_csv(csv_path_bank)
-    print(data_bank.head())
-    upload("bank", data_bank)
+#    data_bank = pd.read_csv(csv_path_bank)
+#    print(data_bank.head())
+#    upload("bank", data_bank)
+#
+#    data_swift_train = pd.read_csv(csv_path_swift_train)
+#    print(data_swift_train.head())
+#    upload("swift_1_train", data_swift_train)
+#
+#    data_swift_test  = pd.read_csv(csv_path_swift_test)
+#    print(data_swift_test.head())
+#    upload("swift_1_test", data_swift_test)
 
-    data_swift_train = pd.read_csv(csv_path_swift_train)
-    print(data_swift_train.head())
-    upload("swift", data_swift_train)
 
-    data_swift_test  = pd.read_csv(csv_path_swift_test)
-    print(data_swift_test.head())
-    upload("swift_test", data_swift_test)
+    csv_path_swift_train_x = 'datasets/PETs/bank_swift/swift_train_x.csv'
+    csv_path_swift_train_y = 'datasets/PETs/bank_swift/swift_train_y.csv'
+    csv_path_swift_test_x = 'datasets/PETs/bank_swift/swift_test_x.csv'
+    csv_path_swift_test_y = 'datasets/PETs/bank_swift/swift_test_y.csv'
+
+    data_swiftp_train_x = pd.read_csv(csv_path_swift_train_x)
+    upload("swift_train_x", data_swiftp_train_x)
+
+    data_swiftp_train_y = pd.read_csv(csv_path_swift_train_y)
+    upload("swift_train_y", data_swiftp_train_y)
+
+    data_swiftp_test_x = pd.read_csv(csv_path_swift_test_x)
+    upload("swift_test_x", data_swiftp_test_x)
+
+    data_swiftp_test_y = pd.read_csv(csv_path_swift_test_y)
+    upload("swift_test_y", data_swiftp_test_y)
+
 
 
 
