@@ -8,6 +8,10 @@ import pandas as pd
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 
 
+records_to_process = 100000
+
+
+
 pd.set_option("display.max_columns", None)
 
 data_dir = "datasets/PETs/bank_swift/"
@@ -17,9 +21,9 @@ data_dir = "datasets/PETs/bank_swift/"
 
 
 
-train = pd.read_csv(data_dir + "/swift_transaction_train_dataset.csv", index_col="MessageId")
+train = pd.read_csv(data_dir + "/swift_transaction_train_dataset.csv", index_col="MessageId", nrows=records_to_process)
 train["Timestamp"] = train["Timestamp"].astype("datetime64[ns]")
-test = pd.read_csv(data_dir + "/swift_transaction_test_dataset.csv", index_col="MessageId")
+test = pd.read_csv(data_dir + "/swift_transaction_test_dataset.csv", index_col="MessageId", nrows=records_to_process)
 test["Timestamp"] = test["Timestamp"].astype("datetime64[ns]")
 
 
