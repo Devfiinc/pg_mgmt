@@ -137,3 +137,6 @@ datasets/PETs/bank_swift/swift_train_y.csv
 datasets/PETs/bank_swift/bank_dataset.csv
 datasets/PETs/bank_swift/swift_transaction_test_dataset.csv
 datasets/PETs/bank_swift/swift_transaction_train_dataset.csv
+
+datasets/PETs/original/*.csv
+datasets/PETs/processed/*.csv

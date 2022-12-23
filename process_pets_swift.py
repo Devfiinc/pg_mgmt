@@ -8,22 +8,27 @@ import pandas as pd
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 
 
-records_to_process = 100000
+
 
 
 
 pd.set_option("display.max_columns", None)
 
-data_dir = "datasets/PETs/bank_swift/"
+data_dir = "datasets/PETs/original/"
 #data_swift_train = data_dir + "swift_transaction_train_dataset.csv"
 #data_swift_test = data_dir + "swift_transaction_test_dataset.csv"
 #data_bank = data_dir + "bank_dataset.csv"
 
 
-
-train = pd.read_csv(data_dir + "/swift_transaction_train_dataset.csv", index_col="MessageId", nrows=records_to_process)
+records_to_process = 100000
+train = pd.read_csv(data_dir + "swift_transaction_train_dataset.csv", index_col="MessageId", nrows=records_to_process)
 train["Timestamp"] = train["Timestamp"].astype("datetime64[ns]")
-test = pd.read_csv(data_dir + "/swift_transaction_test_dataset.csv", index_col="MessageId", nrows=records_to_process)
+test = pd.read_csv(data_dir + "swift_transaction_test_dataset.csv", index_col="MessageId", nrows=records_to_process)
+test["Timestamp"] = test["Timestamp"].astype("datetime64[ns]")
+
+train = pd.read_csv(data_dir + "swift_transaction_train_dataset.csv", index_col="MessageId")
+train["Timestamp"] = train["Timestamp"].astype("datetime64[ns]")
+test = pd.read_csv(data_dir + "swift_transaction_test_dataset.csv", index_col="MessageId")
 test["Timestamp"] = test["Timestamp"].astype("datetime64[ns]")
 
 
@@ -131,8 +136,8 @@ X_train = scaler.transform(X_train)
 X_test = scaler.transform(X_test)
 
 
-np.savetxt("datasets/PETs/bank_swift/swift_train_x.csv", X_train, delimiter=",", fmt='%.10f')
-np.savetxt("datasets/PETs/bank_swift/swift_train_y.csv", Y_train, delimiter=",", fmt='%.1f')
+np.savetxt("datasets/PETs/processed/swift_train_x.csv", X_train, delimiter=",", fmt='%.10f')
+np.savetxt("datasets/PETs/processed/swift_train_y.csv", Y_train, delimiter=",", fmt='%.1f')
 
-np.savetxt("datasets/PETs/bank_swift/swift_test_x.csv", X_test, delimiter=",", fmt='%.10f')
-np.savetxt("datasets/PETs/bank_swift/swift_test_y.csv", Y_test, delimiter=",", fmt='%.1f')
+np.savetxt("datasets/PETs/processed/swift_test_x.csv", X_test, delimiter=",", fmt='%.10f')
+np.savetxt("datasets/PETs/processed/swift_test_y.csv", Y_test, delimiter=",", fmt='%.1f')

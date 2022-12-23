@@ -7,12 +7,12 @@ import pandas as pd
 
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 
-records_to_process = 100000
+records_to_process = None
 
 
 pd.set_option("display.max_columns", None)
 
-data_dir = "datasets/PETs/bank_swift/"
+data_dir = "datasets/PETs/original/"
 #data_swift_train = data_dir + "swift_transaction_train_dataset.csv"
 #data_swift_test = data_dir + "swift_transaction_test_dataset.csv"
 #data_bank = data_dir + "bank_dataset.csv"
@@ -39,4 +39,4 @@ bank_np = bank["Flag"].values
 
 
 
-np.savetxt("datasets/PETs/bank_swift/bank.csv", bank_np, delimiter=",", fmt='%.10f')
+np.savetxt("datasets/PETs/processed/bank.csv", bank_np, delimiter=",", fmt='%.10f')

@@ -1,7 +1,7 @@
 import sys
 
-import snsql
-from snsql import Privacy
+#import snsql
+#from snsql import Privacy
 import pandas as pd
 
 # Postgresql
@@ -32,7 +32,6 @@ def upload(table_name, data, data_proc, data_label=None):
     for d in data_proc:
         headers.append(d)
         
-
     # Create table
     if table_name == "bank":
         query = "DROP TABLE IF EXISTS bank; "
@@ -44,7 +43,6 @@ def upload(table_name, data, data_proc, data_label=None):
         query += "countrycityzip CHAR(80), "
         query += "flags INT, "
         query += "flag INT);"
-
 
     elif table_name == "swift_train" or table_name == "swift_test":
         query = "DROP TABLE IF EXISTS " + table_name + "; "
@@ -76,11 +74,6 @@ def upload(table_name, data, data_proc, data_label=None):
         query += "l6 FLOAT, "
         query += "l7 FLOAT, "
         query += "Label INT);"
-
-
-
-
-
 
     else:
         query  = "DROP TABLE IF EXISTS " + table_name + "; "
@@ -126,11 +119,9 @@ def upload(table_name, data, data_proc, data_label=None):
 
 
 
-
     # Upload data
 
     if table_name == "bank":
-    
 
         for i in range(len(data)):
             print("Loading",i+1,"from",len(data))
@@ -189,7 +180,6 @@ def upload(table_name, data, data_proc, data_label=None):
             query += "l7, "
             query += "Label) VALUES ("
 
-
             query += "$$" + str(data.iloc[i]["MessageId"]) + "$$" + ", "
             query += "$$" + str(data.iloc[i]["Timestamp"]) + "$$" + ", "
             query += "$$" + str(data.iloc[i]["UETR"]) + "$$" + ", "
@@ -227,8 +217,6 @@ def upload(table_name, data, data_proc, data_label=None):
             query += ");"
 
             cur.execute(query)
-
-
 
     else:
         for i in range(len(data)):
@@ -298,36 +286,38 @@ def upload(table_name, data, data_proc, data_label=None):
 def main(argv):
 
     option = argv[1]
+    print("Option:",option)
 
-    records_to_upload = 10000
+    records_to_upload = None
 
-    if option == "bank":
-        csv_path_bank = 'datasets/PETs/bank_swift/bank_dataset.csv'
-        csv_path_bank_label = 'datasets/PETs/bank_swift/bank.csv'
+    data_dir = "datasets/PETs/"
 
-        data_bank = pd.read_csv(csv_path_bank, nrows=records_to_upload)
+    if option == "bank" or option == "all":
+        csv_path_bank       = data_dir + 'original/bank_dataset.csv'
+        csv_path_bank_label = data_dir + 'processed/bank.csv'
+
+        data_bank       = pd.read_csv(csv_path_bank, nrows=records_to_upload)
         data_bank_label = pd.read_csv(csv_path_bank_label, nrows=records_to_upload)
 
         upload("bank", data_bank, data_bank_label)
 
-    elif option == "swift_train":
-        csv_path_swift_train = 'datasets/PETs/bank_swift/swift_transaction_train_dataset.csv'
-        csv_path_swift_train_x = 'datasets/PETs/bank_swift/swift_train_x.csv'
-        csv_path_swift_train_y = 'datasets/PETs/bank_swift/swift_train_y.csv'
+    if option == "swift_train" or option == "all":
+        csv_path_swift_train   = data_dir + 'original/swift_transaction_train_dataset.csv'
+        csv_path_swift_train_x = data_dir + 'processed/swift_train_x.csv'
+        csv_path_swift_train_y = data_dir + 'processed/swift_train_y.csv'
 
-        data_swift_train = pd.read_csv(csv_path_swift_train, nrows=records_to_upload)
+        data_swift_train    = pd.read_csv(csv_path_swift_train, nrows=records_to_upload)
         data_swiftp_train_x = pd.read_csv(csv_path_swift_train_x, nrows=records_to_upload)
         data_swiftp_train_y = pd.read_csv(csv_path_swift_train_y, nrows=records_to_upload)
 
         upload("swift_train", data_swift_train, data_swiftp_train_x, data_swiftp_train_y)
 
-    elif option == "swift_test":
+    if option == "swift_test" or option == "all":
+        csv_path_swift_test   = data_dir + 'original/swift_transaction_test_dataset.csv'
+        csv_path_swift_test_x = data_dir + 'processed/swift_test_x.csv'
+        csv_path_swift_test_y = data_dir + 'processed/swift_test_y.csv'
 
-        csv_path_swift_test = 'datasets/PETs/bank_swift/swift_transaction_test_dataset.csv'
-        csv_path_swift_test_x = 'datasets/PETs/bank_swift/swift_test_x.csv'
-        csv_path_swift_test_y = 'datasets/PETs/bank_swift/swift_test_y.csv'
-
-        data_swift_test  = pd.read_csv(csv_path_swift_test, nrows=records_to_upload)
+        data_swift_test    = pd.read_csv(csv_path_swift_test, nrows=records_to_upload)
         data_swiftp_test_x = pd.read_csv(csv_path_swift_test_x, nrows=records_to_upload)
         data_swiftp_test_y = pd.read_csv(csv_path_swift_test_y, nrows=records_to_upload)
 
