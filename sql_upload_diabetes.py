@@ -14,7 +14,6 @@ def main(argv):
     csv_path = 'datasets/diabetes/diabetes.csv'
 
     data = pd.read_csv(csv_path)
-
     print(data.head())
 
 
@@ -25,11 +24,9 @@ def main(argv):
     cur = conn.cursor()
 
 
-
     # Create table
-    query  = "DROP TABLE IF EXISTS nki;"
-    query += "CREATE TABLE IF NOT EXISTS nki ("
-
+    query  = "DROP TABLE IF EXISTS diabetes; "
+    query += "CREATE TABLE IF NOT EXISTS diabetes ("
 
     ncol = 0
     midval = False
@@ -61,15 +58,10 @@ def main(argv):
 
     query += ")"
 
-    #print(query)
-
     # Create table
     cur.execute(query)
-    cur.execute("CREATE INDEX idx_" + index + " ON nki(" + index + ")")
+    cur.execute("CREATE INDEX idx_" + index + " ON diabetes(" + index + ")")
     cur.execute("SET search_path = schema1, public;")
-
-
-
 
 
     # Upload data
@@ -78,7 +70,7 @@ def main(argv):
         print("Loading",i+1,"from",len(data))
         
 
-        query  = "INSERT INTO nki("
+        query  = "INSERT INTO diabetes("
 
         midval = False
         for d in headers:
@@ -87,8 +79,7 @@ def main(argv):
             query += d.lower()
             midval = True
 
-        query += ")"
-        query += " VALUES ("
+        query += ") VALUES ("
 
         midval = False
         for d in headers:
@@ -96,11 +87,6 @@ def main(argv):
                 query += ", "
 
             dtype = pd.api.types.infer_dtype([data.iloc[i][d]])
-
-            #if dtype == "string":
-            #    query += "'" + str(data.iloc[i][d]) + "'"
-            #else:
-            #    query += str(data.iloc[i][d])
 
             if dtype == "integer":
                 query += str(int(data.iloc[i][d]))
@@ -111,22 +97,16 @@ def main(argv):
                     
             midval = True
 
-
         query += ")"
-
-        #print(query)
 
         cur.execute(query)
 
 
-
-    #cur.execute("SELECT pid age FROM nki")
-    #aaa = cur.fetchall()
-    #print(aaa)
-
     # Close connection
     cur.close()
     conn.close()
+
+
 
 if __name__ == '__main__':
     main(sys.argv)
